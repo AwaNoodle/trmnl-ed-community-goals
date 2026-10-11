@@ -1,0 +1,8 @@
+# trmnlp build output
+_build/
+
+# TRMNL binaries
+bin/
+
+# macOS
+.DS_Store
