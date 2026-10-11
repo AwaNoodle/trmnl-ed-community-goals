@@ -20,7 +20,7 @@ build() {
   {
     echo "---"
     echo "strategy: static"
-    echo "framework_version: 3.1.1"
+    grep "^framework_version:" "$ROOT/src/settings.yml"
     echo "static_data: |"
     sed 's/^/  /' "$ROOT/test/fixtures/$fixture.json"
   } > "$dir/src/settings.yml"
