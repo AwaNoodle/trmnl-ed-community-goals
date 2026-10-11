@@ -1,0 +1,34 @@
+{% assign goal = activeInitiatives | first %}
+{% assign target = goal.target_qty | plus: 0 %}
+{% assign progress = 0 %}
+{% if target > 0 %}
+  {% assign progress = goal.qty | times: 100.0 | divided_by: target | round: 2 %}
+{% endif %}
+{% assign progress_fill = progress | at_most: 100 %}
+
+{% template goal_progress %}
+  <div class="progress-bar {{ size_class }} progress-bar--emphasis-3">
+    <div class="content">
+      <span class="label">Goal Progress</span>
+      <span class="value value--xxsmall">{{ progress }} %</span>
+    </div>
+    <div class="track">
+      <div class="fill" style="width: {{ progress_fill }}%"></div>
+    </div>
+  </div>
+{% endtemplate %}
+
+{% template no_goal %}
+  <div class="layout layout--col layout--center">
+    <span class="title {{ title_class }}">No active community goal</span>
+    <span class="description">Waiting for the next initiative</span>
+  </div>
+{% endtemplate %}
+
+{% template goal_title_bar %}
+  <div class="title_bar">
+    <img class="image" src alt="icon">
+    <span class="title">{{ instance_name }}</span>
+    <span class="instance">{{ market_name }}</span>
+  </div>
+{% endtemplate %}
