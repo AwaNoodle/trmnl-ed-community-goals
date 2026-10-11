@@ -1,0 +1,30 @@
+{% if goal %}
+  <div class="layout layout--col layout--stretch gap">
+    <span class="title">{{ goal.title }}</span>
+    <span class="description" data-clamp="5">{{ goal.bulletin }}</span>
+    <div class="divider"></div>
+    {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "progress-bar--large" %}
+    <div class="divider"></div>
+    <table class="table" data-table-limit="true">
+      <thead>
+        <tr>
+          <td>End Date</td>
+          <td>System</td>
+          <td>Station</td>
+          <td>Objective</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ goal.expiry }}</td>
+          <td>{{ goal.starsystem_name }}</td>
+          <td>{{ goal.market_name }}</td>
+          <td>{{ goal.objective }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  {% render "no_goal", title_class: "" %}
+{% endif %}
+{% render "goal_title_bar", instance_name: trmnl.plugin_settings.instance_name, market_name: goal.market_name %}
