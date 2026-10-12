@@ -1,26 +1,32 @@
 {% if goal %}
-  <div class="layout layout--col layout--stretch gap">
-    <span class="title title--small" data-clamp="2">{{ goal.title }}</span>
-    <span class="description" data-clamp="4">{{ goal.bulletin }}</span>
-    <div class="divider"></div>
-    {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "" %}
-    <div class="divider"></div>
-    <table class="table table--small" data-table-limit="true">
-      <tbody>
-        <tr>
-          <td>End Date</td>
-          <td>{{ goal.expiry }}</td>
-        </tr>
-        <tr>
-          <td>System</td>
-          <td>{{ goal.starsystem_name }}</td>
-        </tr>
-        <tr>
-          <td>Station</td>
-          <td>{{ goal.market_name }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="layout layout--col layout--stretch-x">
+    <div class="flex flex--col flex--stretch-x gap grow basis--0">
+      <span class="title title--small lg:title--base" data-clamp="2">{{ goal.title }}</span>
+      <span class="description lg:description--large" data-clamp="9" data-clamp-portrait="20" data-clamp-lg="12">{{ goal.bulletin }}</span>
+    </div>
+    <div class="flex flex--col flex--stretch-x gap">
+      <div class="divider"></div>
+      {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "" %}
+      <div class="divider"></div>
+    </div>
+    <div class="flex flex--col flex--stretch-x flex--bottom grow basis--0">
+      <table class="table table--small" data-table-limit="true">
+        <tbody>
+          <tr>
+            <td>End Date</td>
+            <td>{{ goal.expiry }}</td>
+          </tr>
+          <tr>
+            <td>System</td>
+            <td>{{ goal.starsystem_name }}</td>
+          </tr>
+          <tr>
+            <td>Station</td>
+            <td>{{ goal.market_name }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 {% else %}
   {% render "no_goal", title_class: "title--small" %}
