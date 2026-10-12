@@ -26,8 +26,14 @@
 {% endtemplate %}
 
 {% template goal_title_bar %}
+  {%- capture icon_svg -%}
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32" fill="none" stroke="black" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 4.5 L27 25 L16 20.5 L5 25 Z"/>
+      <path d="M11.5 16 L14.5 19 L19 13.5"/>
+    </svg>
+  {%- endcapture -%}
   <div class="title_bar">
-    <img class="image" src alt="icon">
+    <img class="image" src="data:image/svg+xml;base64,{{ icon_svg | base64_encode }}" alt="">
     <span class="title">{{ instance_name }}</span>
     <span class="instance">{{ market_name }}</span>
   </div>
