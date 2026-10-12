@@ -1,0 +1,42 @@
+# TRMNLP configuration - sample community goal
+# Copy this file to .trmnlp.yml (which is git-ignored) to use it with `trmnlp serve`.
+# Removing the `activeInitiatives` override makes the preview use the live API instead.
+# {{ env.VARIABLE }} interpolation is available here
+---
+# auto-reload when files change (`watch: false` to disable)
+watch:
+  - .trmnlp.yml
+  - src
+
+# values of custom fields (defined in src/settings.yml)
+custom_fields: {}
+
+# override variables
+variables:
+  trmnl: {}
+  activeInitiatives:
+    - id: "861"
+      title: "Brewer Corporation Jump Satellite Initiative"
+      expiry: "2026-10-15 10:00:00"
+      market_name: "Zero Squared"
+      starsystem_name: "HIP 74116"
+      activityType: "tradelist"
+      target_commodity_list: "Semiconductors, Superconductors, Power Generators, Computer Components"
+      target_qty: "200000000"
+      qty: "200000158"
+      objective: "Semiconductors, Superconductors, Power Generators, Computer Components"
+      images: "NewsImageMarket"
+      bulletin: |
+        Brewer Corporation has issued a call for assistance to aid in the manufacturing of what it calls 'jump satellites'.
+
+        Independent pilots have been asked to supply computer components, superconductors, semiconductors and power generators.
+
+        Pilots can support this initiative by first signing up at the megaship Zero Squared in the HIP 74116 system, before supplying the required commodities.
+
+        Pilots who supply at least 1 commodity will receive the following rewards:
+
+        - The top 75% contributors will receive 1 x Size 4 and 1 x Size 5 SCO-enabled FSD, pre-engineered with Increased Range and Fast Boot Sequence and unlocked experimentals.
+        - The top 50% contributors will also receive 1 x Size 6 and 1 x Size 7 SCO-enabled FSD, pre-engineered with Increased Range and Fast Boot Sequence and unlocked experimentals.
+        - Credits, depending on success tier achieved and individual contribution level.
+
+        The campaign will run for one week. If the final target is met earlier than planned, the campaign will end immediately.

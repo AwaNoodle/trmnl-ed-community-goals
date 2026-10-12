@@ -13,6 +13,7 @@ jobs:
         with:
           ruby-version: "4.0"
       - run: gem install trmnl_preview
+      - run: cp .trmnlp.yml.example .trmnlp.yml
       - run: trmnlp lint
 
   test:
@@ -35,6 +36,7 @@ jobs:
         with:
           ruby-version: "4.0"
       - run: gem install trmnl_preview
+      - run: cp .trmnlp.yml.example .trmnlp.yml
       - run: trmnlp push --force
         env:
           TRMNL_API_KEY: ${{ secrets.TRMNL_API_KEY }}

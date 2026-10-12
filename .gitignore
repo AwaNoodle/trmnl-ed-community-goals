@@ -6,3 +6,6 @@ bin/
 
 # macOS
 .DS_Store
+
+# trmnlp local dev config (copy from .trmnlp.yml.example)
+.trmnlp.yml
