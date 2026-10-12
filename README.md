@@ -2,7 +2,7 @@
 
 ![ED Community Goals on a TRMNL display](docs/preview.png)
 
-A [TRMNL](https://trmnl.com) e-ink display plugin that shows progress on the current Elite Dangerous community goal: its title, bulletin, a progress bar, end date, system, station and objective. When there is no active goal it shows "No active community goal".
+A [TRMNL](https://trmnl.com) e-ink display plugin that shows progress on the current Elite Dangerous community goal.
 
 ## Repository and deployment
 
@@ -16,7 +16,7 @@ Data comes from the public Elite Dangerous initiatives API (`https://api.orerve.
 
 This repository is the source of truth for the live plugin. The workflow in `.github/workflows/trmnl.yml` runs `lint` and `test` on every pull request. On merge to `main` it runs `push`, which deploys to the live TRMNL plugin with `trmnlp push --force` using the `TRMNL_API_KEY` repository secret.
 
-`main` is protected: changes go through a pull request and both checks must pass. Avoid editing the plugin in the TRMNL web editor, because the next deploy overwrites those edits.
+All changes go through a pull request to deploy. Avoid editing the plugin in the TRMNL web editor, because the next deploy overwrites those edits.
 
 ## Development
 
