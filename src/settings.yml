@@ -11,26 +11,8 @@ polling_url: https://api.orerve.net/2.0/website/initiatives/list?lang=en
 polling_headers:
 polling_body:
 id: 327741
-oauth_enabled: 'false'
-oauth_pkce_enabled: 'no'
-oauth_authorize_url: https://auth.frontierstore.net/auth
-oauth_token_url: https://auth.frontierstore.net/token
-oauth_scopes: capi,auth
-oauth_scope_separator: space_(default)
-oauth_refresh_url: ''
-oauth_auth_params: "{\r\n  \"audience\": \"steam,frontier\"\r\n}"
-oauth_token_site: ''
-oauth_token_request_auth_method: body
-oauth_body_format: form
-oauth_token_response_metadata: ''
-oauth_authorization_method: header
-oauth_refresh_params: ''
-oauth_token_field_name: ''
-oauth_expiry_field_name: ''
-oauth_expiry_strategy: expirein
-oauth_fixed_expiry_ms: ''
 name: ED Community Goals
-description:
+description: Show Elite Community Goals
 refresh_interval: 120
 custom_fields:
 - keyname: author_bio
