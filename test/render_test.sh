@@ -47,12 +47,13 @@ reject() {
   ! grep -qF -- "$text" "$WORK/$fixture/_build/$layout.html" || fail "$fixture/$layout should not contain '$text'"
 }
 
-# Every fixture must render without broken maths or template errors.
+# Every fixture must render without broken maths or template errors, and with the inline title bar icon.
 check_clean() {
   local fixture="$1" layout="$2"
   reject "$fixture" "$layout" "NaN"
   reject "$fixture" "$layout" "Infinity"
   reject "$fixture" "$layout" "Liquid error"
+  expect "$fixture" "$layout" 'src="data:image/svg+xml;base64,PHN2Zy'
 }
 
 check_goal() {
