@@ -4,7 +4,7 @@
       <span class="title lg:title--large" data-clamp="2">{{ goal.title }}</span>
       <span class="description description--large lg:description--xlarge" data-clamp="9" data-clamp-portrait="23" data-clamp-lg="18" data-clamp-lg-portrait="28">{{ goal.bulletin }}</span>
     </div>
-    <div class="flex flex--col flex--stretch-x gap" data-bottom>
+    <div class="flex flex--col flex--stretch-x gap">
       <div class="divider"></div>
       {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "progress-bar--large" %}
       <table class="table" data-table-limit="true">
