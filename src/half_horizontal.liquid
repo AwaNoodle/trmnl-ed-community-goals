@@ -5,14 +5,14 @@
     <table class="table table--small" data-table-limit="true">
       <thead>
         <tr>
-          <td>End Date</td>
-          <td>System</td>
-          <td>Station</td>
+          <td class="w--[41cqw] portrait:w--auto">End Date</td>
+          <td class="w--[26cqw] portrait:w--auto">System</td>
+          <td class="w--[33cqw] portrait:w--auto">Station</td>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>{{ goal.expiry }}</td>
+          <td>{{ goal.expiry | date: "%Y-%m-%d" }}</td>
           <td>{{ goal.starsystem_name }}</td>
           <td>{{ goal.market_name }}</td>
         </tr>

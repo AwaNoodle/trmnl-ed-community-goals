@@ -2,7 +2,7 @@
   <div class="layout layout--col layout--stretch gap">
     <span class="title title--small" data-clamp="2">{{ goal.title }}</span>
     {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "progress-bar--small" %}
-    <span class="label label--small">Ends {{ goal.expiry }}</span>
+    <span class="label label--small">Ends {{ goal.expiry | date: "%Y-%m-%d" }}</span>
   </div>
 {% else %}
   {% render "no_goal", title_class: "title--small" %}
