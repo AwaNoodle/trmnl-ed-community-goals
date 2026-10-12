@@ -1,4 +1,6 @@
-# TRMNLP configuration
+# TRMNLP configuration - no active community goals
+# Copy this file to .trmnlp.yml (which is git-ignored) to use it with `trmnlp serve`.
+# Removing the `activeInitiatives` override makes the preview use the live API instead.
 # {{ env.VARIABLE }} interpolation is available here
 ---
 # auto-reload when files change (`watch: false` to disable)
@@ -12,3 +14,4 @@ custom_fields: {}
 # override variables
 variables:
   trmnl: {}
+  activeInitiatives: []
