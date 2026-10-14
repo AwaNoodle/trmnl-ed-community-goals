@@ -10,6 +10,10 @@ refresh_interval_floor:
 polling_url: https://api.orerve.net/2.0/website/initiatives/list?lang=en
 polling_headers:
 polling_body:
+oauth_authorize_url: ''
+oauth_token_url: ''
+oauth_scopes: ''
+oauth_auth_params: ''
 id: 327741
 name: ED Community Goals
 description: Show Elite Community Goals
