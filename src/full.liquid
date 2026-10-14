@@ -2,7 +2,7 @@
   <div class="layout layout--col layout--stretch-x">
     <div class="flex flex--col flex--stretch-x gap grow basis--0">
       <span class="title lg:title--large" data-clamp="2">{{ goal.title }}</span>
-      <span class="description description--large lg:description--xlarge" data-clamp="9" data-clamp-portrait="23" data-clamp-lg="18" data-clamp-lg-portrait="28">{{ goal.bulletin }}</span>
+      <span class="description description--large lg:description--xxlarge" data-clamp="9" data-clamp-portrait="23" data-clamp-lg="16" data-clamp-lg-portrait="24">{{ goal.bulletin }}</span>
     </div>
     <div class="flex flex--col flex--stretch-x gap">
       <div class="divider"></div>
@@ -10,18 +10,18 @@
       <table class="table" data-table-limit="true">
         <thead>
           <tr>
-            <td class="w--[16cqw] portrait:w--[24cqw]">End Date</td>
-            <td class="w--[11cqw] portrait:w--auto">System</td>
-            <td class="w--[14cqw] portrait:w--auto">Station</td>
-            <td>Objective</td>
+            <th class="w--[16cqw] portrait:w--[24cqw]"><span class="title">End Date</span></th>
+            <th class="w--[11cqw] portrait:w--auto"><span class="title">System</span></th>
+            <th class="w--[14cqw] portrait:w--auto"><span class="title">Station</span></th>
+            <th><span class="title">Objective</span></th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td>{{ goal.expiry | date: "%Y-%m-%d" }}</td>
-            <td>{{ goal.starsystem_name }}</td>
-            <td>{{ goal.market_name }}</td>
-            <td>{{ goal.objective }}</td>
+            <td><span class="label">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
+            <td><span class="label">{{ goal.starsystem_name }}</span></td>
+            <td><span class="label">{{ goal.market_name }}</span></td>
+            <td><span class="label">{{ goal.objective }}</span></td>
           </tr>
         </tbody>
       </table>
