@@ -1,4 +1,52 @@
-{% if goal %}
+{% assign shown_goal_count = 1 %}
+{% assign show_all_goals = trmnl.plugin_settings.custom_fields_values.show_all_goals | append: "" %}
+{% if show_all_goals == "true" %}
+  {% assign shown_goal_count = active_goal_count | at_most: 4 %}
+{% endif %}
+{% if shown_goal_count == 2 %}
+  <div class="layout layout--col layout--stretch-x gap">
+    {% for shown_goal in activeInitiatives limit: 2 %}
+      {% unless forloop.first %}<div class="divider"></div>{% endunless %}
+      <div class="flex flex--col flex--stretch-x gap grow basis--0">
+        <span class="title lg:title--large" data-clamp="1">{{ shown_goal.title }}</span>
+        <span class="description" data-clamp="2">{{ shown_goal.bulletin }}</span>
+        {% render "goal_progress", goal: shown_goal, size_class: "" %}
+        <table class="table table--small" style="table-layout: fixed; width: 100%;">
+          <tbody>
+            <tr>
+              <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">Objective</span></td>
+              <td><span class="label" data-clamp="2">{{ shown_goal.objective }}</span></td>
+            </tr>
+            <tr>
+              <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">End Date</span></td>
+              <td><span class="label">{{ shown_goal.expiry | date: "%Y-%m-%d" }}</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    {% endfor %}
+  </div>
+{% elsif shown_goal_count > 2 %}
+  <div class="grid grid--cols-2 grow basis--0 gap">
+    {% for shown_goal in activeInitiatives limit: 2 %}
+      <div class="flex flex--row gap">
+        <div class="flex flex--col flex--stretch-x grow basis--0">
+          {% render "goal_summary", goal: shown_goal %}
+        </div>
+        {% if forloop.length == 2 and forloop.first %}<div class="divider--v"></div>{% endif %}
+      </div>
+    {% endfor %}
+    <div class="divider col--span-2"></div>
+    {% for shown_goal in activeInitiatives offset: 2 limit: 2 %}
+      <div class="flex flex--row gap">
+        <div class="flex flex--col flex--stretch-x grow basis--0">
+          {% render "goal_summary", goal: shown_goal %}
+        </div>
+        {% if forloop.length == 2 and forloop.first %}<div class="divider--v"></div>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+{% elsif goal %}
   <div class="layout layout--col layout--stretch-x">
     <div class="flex flex--col flex--stretch-x gap grow basis--0">
       <span class="title lg:title--large" data-clamp="2">{{ goal.title }}</span>
@@ -6,7 +54,7 @@
     </div>
     <div class="flex flex--col flex--stretch-x gap">
       <div class="divider"></div>
-      {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "progress-bar--large" %}
+      {% render "goal_progress", goal: goal, size_class: "progress-bar--large" %}
       <table class="table" data-table-limit="true">
         <thead>
           <tr>

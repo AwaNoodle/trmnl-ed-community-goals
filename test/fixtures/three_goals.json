@@ -1,0 +1,37 @@
+{
+  "activeInitiatives": [
+    {
+      "id": "1",
+      "title": "Fixture Goal 1",
+      "bulletin": "Fixture bulletin 1.",
+      "qty": "50",
+      "target_qty": "200",
+      "expiry": "2026-10-11 10:00:00",
+      "starsystem_name": "Fixture System 1",
+      "market_name": "Fixture Station 1",
+      "objective": "Fixture Objective 1"
+    },
+    {
+      "id": "2",
+      "title": "Fixture Goal 2",
+      "bulletin": "Fixture bulletin 2.",
+      "qty": "150",
+      "target_qty": "200",
+      "expiry": "2026-10-12 10:00:00",
+      "starsystem_name": "Fixture System 2",
+      "market_name": "Fixture Station 2",
+      "objective": "Fixture Objective 2"
+    },
+    {
+      "id": "3",
+      "title": "Fixture Goal 3",
+      "bulletin": "Fixture bulletin 3.",
+      "qty": "300",
+      "target_qty": "200",
+      "expiry": "2026-10-13 10:00:00",
+      "starsystem_name": "Fixture System 3",
+      "market_name": "Fixture Station 3",
+      "objective": "Fixture Objective 3"
+    }
+  ]
+}

@@ -25,3 +25,8 @@ custom_fields:
   name: About This Plugin
   description: Shows progress on the current Elite Dangerous community goal.
   github_url: https://github.com/AwaNoodle/trmnl-ed-community-goals
+- keyname: show_all_goals
+  field_type: boolean
+  name: Show All Goals
+  description: Full screen layout only. Shows up to four active goals instead of the first one.
+  default: false
