@@ -1,7 +1,7 @@
 {% if goal %}
   <div class="layout layout--col layout--stretch gap">
     <span class="title title--small" data-clamp="1">{{ goal.title }}</span>
-    {% render "goal_progress", progress: progress, progress_fill: progress_fill, size_class: "" %}
+    {% render "goal_progress", goal: goal, size_class: "" %}
     <table class="table table--small" data-table-limit="true">
       <thead>
         <tr>
