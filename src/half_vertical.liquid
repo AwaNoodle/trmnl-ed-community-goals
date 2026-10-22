@@ -28,4 +28,4 @@
 {% else %}
   {% render "no_goal", title_class: "title--small" %}
 {% endif %}
-{% render "goal_title_bar", instance_name: trmnl.plugin_settings.instance_name, market_name: goal.market_name %}
+{% render "goal_title_bar", instance_name: trmnl.plugin_settings.instance_name, active_goal_count: active_goal_count %}
