@@ -1,0 +1,15 @@
+{
+  "activeInitiatives": [
+    {
+      "id": "1",
+      "title": "Fixture Trade Initiative",
+      "bulletin": "Fixture bulletin text.",
+      "qty": "199999",
+      "target_qty": "200000",
+      "expiry": "2026-10-15 10:00:00",
+      "starsystem_name": "Fixture System",
+      "market_name": "Fixture Station",
+      "objective": "Fixture Commodity"
+    }
+  ]
+}
