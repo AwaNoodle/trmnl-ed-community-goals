@@ -71,7 +71,7 @@ check_goal() {
       check_clean "$name" "$layout"
       expect "$name" "$layout" "Fixture Trade Initiative"
       expect "$name" "$layout" "$percent %"
-      expect "$name" "$layout" "width: $fill%"
+      expect "$name" "$layout" "class=\"fill\" style=\"width: $fill%\""
       expect_count "$name" "$layout" "Goal Progress" 1
       reject "$name" "$layout" "$EMPTY_STATE"
     done
@@ -124,8 +124,8 @@ reject two_goals-false full "Fixture Goal 2"
 
 check_all_goals two_goals 2
 expect two_goals-true full "Fixture Goal 2"
-expect two_goals-true full "width: 25.0%"
-expect two_goals-true full "width: 75.0%"
+expect two_goals-true full 'class="fill" style="width: 25.0%"'
+expect two_goals-true full 'class="fill" style="width: 75.0%"'
 expect two_goals-true full "2026-10-12"
 expect two_goals-true full "Fixture Objective 2"
 expect two_goals-true full "Fixture bulletin 1."
@@ -135,12 +135,12 @@ reject two_goals-true full "Fixture System 1"
 check_all_goals three_goals 3
 expect three_goals-true full "Fixture Goal 3"
 expect three_goals-true full "150.0 %"
-expect three_goals-true full "width: 100%"
+expect three_goals-true full 'class="fill" style="width: 100%"'
 reject three_goals-true full "Fixture Objective 1"
 
 check_all_goals five_goals 4
 expect five_goals-true full "Fixture Goal 4"
-expect five_goals-true full "width: 0%"
+expect five_goals-true full 'class="fill" style="width: 0%"'
 expect five_goals-true full "5 Active Goals"
 reject five_goals-true full "Fixture Goal 5"
 
