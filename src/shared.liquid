@@ -5,7 +5,8 @@
   {% assign target = goal.target_qty | plus: 0 %}
   {% assign progress = 0 %}
   {% if target > 0 %}
-    {% assign progress = goal.qty | times: 100.0 | divided_by: target | round: 2 %}
+    {% comment %} Round down to 2 decimals so an unfinished goal never shows 100 % {% endcomment %}
+    {% assign progress = goal.qty | times: 10000.0 | divided_by: target | floor | divided_by: 100.0 %}
   {% endif %}
   {% assign progress_fill = progress | at_most: 100 %}
   <div class="progress-bar {{ size_class }} progress-bar--emphasis-3">
