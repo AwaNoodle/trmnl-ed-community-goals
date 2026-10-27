@@ -53,6 +53,16 @@ expect_count() {
   [ "$found" -eq "$count" ] || fail "$name/$layout should contain '$text' $count time(s), found $found"
 }
 
+# Lists each goal title with the progress text and bar width that follow it, in page order,
+# so a bar shown under the wrong goal fails even when every value is on the page somewhere.
+expect_goal_bars() {
+  local name="$1" layout="$2" expected="$3" found
+  found="$(grep -oE 'Fixture Goal [0-9]+|value--xxsmall">[^<]*|class="fill" style="width: [^"]*"' "$WORK/$name/_build/$layout.html" \
+    | sed -E 's/^value--xxsmall">//; s/^class="fill" style="width: //; s/"$//' \
+    | paste -sd '|' -)"
+  [ "$found" = "$expected" ] || fail "$name/$layout should show goal bars '$expected', found '$found'"
+}
+
 # Every fixture must render without broken maths or template errors, and with the inline title bar icon.
 check_clean() {
   local name="$1" layout="$2"
@@ -129,18 +139,21 @@ expect two_goals-true full "Fixture Objective 2"
 expect two_goals-true full "Fixture bulletin 1."
 expect two_goals-true full "Fixture bulletin 2."
 reject two_goals-true full "Fixture System 1"
+expect_goal_bars two_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%"
 
 check_all_goals three_goals 3
 expect three_goals-true full "Fixture Goal 3"
 expect three_goals-true full "150.0 %"
 expect three_goals-true full "width: 100%"
 reject three_goals-true full "Fixture Objective 1"
+expect_goal_bars three_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%"
 
 check_all_goals five_goals 4
 expect five_goals-true full "Fixture Goal 4"
 expect five_goals-true full "width: 0%"
 expect five_goals-true full "5 Active Goals"
 reject five_goals-true full "Fixture Goal 5"
+expect_goal_bars five_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%|Fixture Goal 4|0 %|0%"
 
 if [ "$failures" -gt 0 ]; then
   echo "$failures check(s) failed"
