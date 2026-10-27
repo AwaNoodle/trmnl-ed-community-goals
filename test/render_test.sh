@@ -110,6 +110,8 @@ check_all_goals() {
 check_goal active 25.0 25.0
 check_goal over_target 125.0 100
 check_goal zero_target 0 0
+# An unfinished goal never rounds up to 100 % or a full bar.
+check_goal almost_complete 99.99 99.99
 check_empty_state no_goals
 check_empty_state no_data
 
