@@ -13,10 +13,12 @@
         {% render "goal_progress", goal: shown_goal, size_class: "" %}
         <table class="table table--small" style="table-layout: fixed; width: 100%;">
           <tbody>
-            <tr>
-              <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">Objective</span></td>
-              <td><span class="label" data-clamp="2">{{ shown_goal.objective }}</span></td>
-            </tr>
+            {% if shown_goal.objective != blank %}
+              <tr>
+                <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">Objective</span></td>
+                <td><span class="label" data-clamp="2">{{ shown_goal.objective }}</span></td>
+              </tr>
+            {% endif %}
             <tr>
               <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">End Date</span></td>
               <td><span class="label">{{ shown_goal.expiry | date: "%Y-%m-%d" }}</span></td>
@@ -61,7 +63,7 @@
             <th class="w--[16cqw] portrait:w--[24cqw]"><span class="title">End Date</span></th>
             <th class="w--[11cqw] portrait:w--auto"><span class="title">System</span></th>
             <th class="w--[14cqw] portrait:w--auto"><span class="title">Station</span></th>
-            <th><span class="title">Objective</span></th>
+            {% if goal.objective != blank %}<th><span class="title">Objective</span></th>{% endif %}
           </tr>
         </thead>
         <tbody>
@@ -69,7 +71,7 @@
             <td><span class="label">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
             <td><span class="label">{{ goal.starsystem_name }}</span></td>
             <td><span class="label">{{ goal.market_name }}</span></td>
-            <td><span class="label">{{ goal.objective }}</span></td>
+            {% if goal.objective != blank %}<td><span class="label">{{ goal.objective }}</span></td>{% endif %}
           </tr>
         </tbody>
       </table>

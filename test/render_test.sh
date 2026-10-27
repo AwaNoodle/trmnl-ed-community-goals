@@ -81,7 +81,7 @@ check_goal() {
       check_clean "$name" "$layout"
       expect "$name" "$layout" "Fixture Trade Initiative"
       expect "$name" "$layout" "$percent %"
-      expect "$name" "$layout" "width: $fill%"
+      expect "$name" "$layout" "class=\"fill\" style=\"width: $fill%\""
       expect_count "$name" "$layout" "Goal Progress" 1
       reject "$name" "$layout" "$EMPTY_STATE"
     done
@@ -120,6 +120,8 @@ check_all_goals() {
 check_goal active 25.0 25.0
 check_goal over_target 125.0 100
 check_goal zero_target 0 0
+# An unfinished goal never rounds up to 100 % or a full bar.
+check_goal almost_complete 99.99 99.99
 check_empty_state no_goals
 check_empty_state no_data
 
@@ -132,8 +134,8 @@ reject two_goals-false full "Fixture Goal 2"
 
 check_all_goals two_goals 2
 expect two_goals-true full "Fixture Goal 2"
-expect two_goals-true full "width: 25.0%"
-expect two_goals-true full "width: 75.0%"
+expect two_goals-true full 'class="fill" style="width: 25.0%"'
+expect two_goals-true full 'class="fill" style="width: 75.0%"'
 expect two_goals-true full "2026-10-12"
 expect two_goals-true full "Fixture Objective 2"
 expect two_goals-true full "Fixture bulletin 1."
@@ -144,16 +146,27 @@ expect_goal_bars two_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2
 check_all_goals three_goals 3
 expect three_goals-true full "Fixture Goal 3"
 expect three_goals-true full "150.0 %"
-expect three_goals-true full "width: 100%"
+expect three_goals-true full 'class="fill" style="width: 100%"'
 reject three_goals-true full "Fixture Objective 1"
 expect_goal_bars three_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%"
 
 check_all_goals five_goals 4
 expect five_goals-true full "Fixture Goal 4"
-expect five_goals-true full "width: 0%"
+expect five_goals-true full 'class="fill" style="width: 0%"'
 expect five_goals-true full "5 Active Goals"
 reject five_goals-true full "Fixture Goal 5"
 expect_goal_bars five_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%|Fixture Goal 4|0 %|0%"
+
+# A goal with a blank objective shows no empty Objective label or column.
+build blank_objective-false blank_objective false
+check_clean blank_objective-false full
+expect blank_objective-false full "Fixture Goal 1"
+reject blank_objective-false full '<span class="title">Objective</span>'
+
+build blank_objective-true blank_objective true
+check_clean blank_objective-true full
+expect_count blank_objective-true full '<span class="label">Objective</span>' 1
+expect blank_objective-true full "Fixture Objective 2"
 
 if [ "$failures" -gt 0 ]; then
   echo "$failures check(s) failed"
