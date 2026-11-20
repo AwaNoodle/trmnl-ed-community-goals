@@ -7,6 +7,8 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LAYOUTS=(full half_horizontal half_vertical quadrant)
+SMALL_LAYOUTS=(half_horizontal half_vertical quadrant)
+BIG_PERCENT='value--tnums" data-value-fit="true">'
 EMPTY_STATE="No active community goal"
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
@@ -72,20 +74,33 @@ check_clean() {
   expect "$name" "$layout" 'src="data:image/svg+xml;base64,PHN2Zy'
 }
 
+# The full view shows a progress bar with a two-decimal figure; the smaller views show a big whole percent.
 check_goal() {
-  local fixture="$1" percent="$2" fill="$3" layout name
+  local fixture="$1" percent="$2" fill="$3" whole="$4" layout name
   for show_all in false true; do
     name="$fixture-$show_all"
     build "$name" "$fixture" "$show_all"
     for layout in "${LAYOUTS[@]}"; do
       check_clean "$name" "$layout"
       expect "$name" "$layout" "Fixture Trade Initiative"
-      expect "$name" "$layout" "$percent %"
-      expect "$name" "$layout" "class=\"fill\" style=\"width: $fill%\""
-      expect_count "$name" "$layout" "Goal Progress" 1
       reject "$name" "$layout" "$EMPTY_STATE"
     done
+    expect "$name" full "$percent %"
+    expect "$name" full "class=\"fill\" style=\"width: $fill%\""
+    expect_count "$name" full "Goal Progress" 1
     expect "$name" full "Fixture bulletin text."
+    for layout in "${SMALL_LAYOUTS[@]}"; do
+      expect_count "$name" "$layout" "$BIG_PERCENT" 1
+      expect "$name" "$layout" "$BIG_PERCENT$whole%</span>"
+      expect "$name" "$layout" "Ends 2026-10-15"
+      reject "$name" "$layout" "Goal Progress"
+      reject "$name" "$layout" 'class="fill"'
+    done
+    for layout in half_horizontal half_vertical; do
+      expect "$name" "$layout" "Fixture System · Fixture Station"
+      expect "$name" "$layout" "Fixture Commodity"
+    done
+    expect "$name" half_vertical "Fixture bulletin text."
   done
 }
 
@@ -98,6 +113,7 @@ check_empty_state() {
       check_clean "$name" "$layout"
       expect "$name" "$layout" "$EMPTY_STATE"
       reject "$name" "$layout" "Goal Progress"
+      reject "$name" "$layout" "$BIG_PERCENT"
     done
   done
 }
@@ -111,17 +127,18 @@ check_all_goals() {
     reject "$name" "$layout" "$EMPTY_STATE"
   done
   expect_count "$name" full "Goal Progress" "$shown"
-  for layout in half_horizontal half_vertical quadrant; do
-    expect_count "$name" "$layout" "Goal Progress" 1
+  for layout in "${SMALL_LAYOUTS[@]}"; do
+    expect_count "$name" "$layout" "$BIG_PERCENT" 1
     reject "$name" "$layout" "Fixture Goal 2"
   done
 }
 
-check_goal active 25.0 25.0
-check_goal over_target 125.0 100
-check_goal zero_target 0 0
-# An unfinished goal never rounds up to 100 % or a full bar.
-check_goal almost_complete 99.99 99.99
+check_goal active 25.0 25.0 25
+# A goal past its target shows its real figure, with a full bar.
+check_goal over_target 125.0 100 125
+check_goal zero_target 0 0 0
+# An unfinished goal never rounds up to 100 %, a full bar or a big 100%.
+check_goal almost_complete 99.99 99.99 99
 check_empty_state no_goals
 check_empty_state no_data
 
@@ -169,6 +186,11 @@ build blank_objective-false blank_objective false
 check_clean blank_objective-false full
 expect blank_objective-false full "Fixture Goal 1"
 reject blank_objective-false full '<span class="title">Objective</span>'
+# The smaller views list only the location and end date, with no empty objective line.
+for layout in half_horizontal half_vertical; do
+  check_clean blank_objective-false "$layout"
+  expect_count blank_objective-false "$layout" 'label lg:label--large" data-clamp="1">' 1
+done
 
 build blank_objective-true blank_objective true
 check_clean blank_objective-true full

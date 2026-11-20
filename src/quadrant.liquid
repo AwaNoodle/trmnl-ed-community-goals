@@ -1,8 +1,14 @@
 {% if goal %}
-  <div class="layout layout--col layout--stretch gap">
-    <span class="title title--small lg:label--large" data-clamp="2">{{ goal.title }}</span>
-    {% render "goal_progress", goal: goal, size_class: "progress-bar--small lg:progress-bar--large" %}
-    <span class="label label--small lg:title--base">Ends {{ goal.expiry | date: "%Y-%m-%d" }}</span>
+  <div class="layout layout--col layout--stretch-x">
+    <div class="flex flex--row gap grow basis--0">
+      <div class="flex flex--col flex--center-y w--[42cqw] shrink-0">
+        {% render "goal_percent", goal: goal, size_class: "value--xxlarge portrait:value--xlarge lg:value--xxxlarge lg:portrait:value--xxlarge" %}
+      </div>
+      <div class="flex flex--col flex--left flex--center-y gap--small grow basis--0">
+        <span class="title title--small lg:title--base" data-clamp="3">{{ goal.title }}</span>
+        <span class="label label--small lg:label--large">Ends {{ goal.expiry | date: "%Y-%m-%d" }}</span>
+      </div>
+    </div>
   </div>
 {% else %}
   {% render "no_goal", title_class: "title--small" %}
