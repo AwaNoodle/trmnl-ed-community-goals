@@ -57,8 +57,8 @@ expect_count() {
 # so a bar shown under the wrong goal fails even when every value is on the page somewhere.
 expect_goal_bars() {
   local name="$1" layout="$2" expected="$3" found
-  found="$(grep -oE 'Fixture Goal [0-9]+|value--xxsmall">[^<]*|class="fill" style="width: [^"]*"' "$WORK/$name/_build/$layout.html" \
-    | sed -E 's/^value--xxsmall">//; s/^class="fill" style="width: //; s/"$//' \
+  found="$(grep -oE 'Fixture Goal [0-9]+|value value--[^"]*">[^<]*|class="fill" style="width: [^"]*"' "$WORK/$name/_build/$layout.html" \
+    | sed -E 's/^value value--[^"]*">//; s/^class="fill" style="width: //; s/"$//' \
     | paste -sd '|' -)"
   [ "$found" = "$expected" ] || fail "$name/$layout should show goal bars '$expected', found '$found'"
 }

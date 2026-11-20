@@ -1,7 +1,7 @@
 {% if goal %}
   <div class="layout layout--col layout--stretch gap">
-    <span class="title title--small" data-clamp="1">{{ goal.title }}</span>
-    {% render "goal_progress", goal: goal, size_class: "" %}
+    <span class="title lg:title--large" data-clamp="1">{{ goal.title }}</span>
+    {% render "goal_progress", goal: goal, size_class: "lg:progress-bar--large" %}
     <table class="table table--small" data-table-limit="true">
       <thead>
         <tr>
@@ -12,9 +12,9 @@
       </thead>
       <tbody>
         <tr>
-          <td><span class="label">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
-          <td><span class="label">{{ goal.starsystem_name }}</span></td>
-          <td><span class="label">{{ goal.market_name }}</span></td>
+          <td><span class="label lg:label--large">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
+          <td><span class="label lg:label--large">{{ goal.starsystem_name }}</span></td>
+          <td><span class="label lg:label--large">{{ goal.market_name }}</span></td>
         </tr>
       </tbody>
     </table>
