@@ -1,23 +1,16 @@
 {% if goal %}
-  <div class="layout layout--col layout--stretch gap">
-    <span class="title lg:title--large" data-clamp="1">{{ goal.title }}</span>
-    {% render "goal_progress", goal: goal, size_class: "lg:progress-bar--large" %}
-    <table class="table table--small" data-table-limit="true">
-      <thead>
-        <tr>
-          <th class="w--[41cqw] portrait:w--auto"><span class="title">End Date</span></th>
-          <th class="w--[26cqw] portrait:w--auto"><span class="title">System</span></th>
-          <th class="w--[33cqw] portrait:w--auto"><span class="title">Station</span></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="label lg:label--large">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
-          <td><span class="label lg:label--large">{{ goal.starsystem_name }}</span></td>
-          <td><span class="label lg:label--large">{{ goal.market_name }}</span></td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="layout layout--col layout--stretch-x">
+    <div class="flex flex--row flex--stretch-y gap--large grow basis--0">
+      <div class="flex flex--col flex--center-y w--[26cqw] shrink-0">
+        {% render "goal_percent", goal: goal, size_class: "value--xxxlarge portrait:value--xxlarge lg:value--giga lg:portrait:value--xxxlarge" %}
+        <span class="label lg:label--large">Complete</span>
+      </div>
+      <div class="divider--v"></div>
+      <div class="flex flex--col flex--stretch-x flex--center-y gap grow basis--0">
+        <span class="title lg:title--large" data-clamp="2">{{ goal.title }}</span>
+        {% render "goal_facts", goal: goal %}
+      </div>
+    </div>
   </div>
 {% else %}
   {% render "no_goal", title_class: "title--small" %}

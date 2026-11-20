@@ -47,3 +47,21 @@
     <span class="instance">{{ active_goal_count }} Active Goal{% if active_goal_count != 1 %}s{% endif %}</span>
   </div>
 {% endtemplate %}
+
+{% template goal_percent %}
+  {% assign target = goal.target_qty | plus: 0 %}
+  {% assign percent = 0 %}
+  {% if target > 0 %}
+    {% comment %} Whole percent, rounded down so an unfinished goal never shows 100% {% endcomment %}
+    {% assign percent = goal.qty | plus: 0 | times: 100.0 | divided_by: target | floor %}
+  {% endif %}
+  <span class="value {{ size_class }} value--tnums" data-value-fit="true">{{ percent }}%</span>
+{% endtemplate %}
+
+{% template goal_facts %}
+  <div class="flex flex--col flex--left gap--small">
+    {% if goal.objective != blank %}<span class="label lg:label--large" data-clamp="1">{{ goal.objective }}</span>{% endif %}
+    <span class="label lg:label--large" data-clamp="1">{{ goal.starsystem_name }} · {{ goal.market_name }}</span>
+    <span class="label lg:label--large">Ends {{ goal.expiry | date: "%Y-%m-%d" }}</span>
+  </div>
+{% endtemplate %}
