@@ -16,12 +16,12 @@
             {% if shown_goal.objective != blank %}
               <tr>
                 <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">Objective</span></td>
-                <td><span class="label" data-clamp="2">{{ shown_goal.objective }}</span></td>
+                <td><span class="label lg:label--large" data-clamp="2">{{ shown_goal.objective }}</span></td>
               </tr>
             {% endif %}
             <tr>
               <td class="w--[12cqw] portrait:w--[18cqw]"><span class="label">End Date</span></td>
-              <td><span class="label">{{ shown_goal.expiry | date: "%Y-%m-%d" }}</span></td>
+              <td><span class="label lg:label--large">{{ shown_goal.expiry | date: "%Y-%m-%d" }}</span></td>
             </tr>
           </tbody>
         </table>
@@ -29,22 +29,24 @@
     {% endfor %}
   </div>
 {% elsif shown_goal_count > 2 %}
-  <div class="grid grid--cols-2 grow basis--0 gap">
+  <div class="grid grid--cols-2 lg:portrait:flex lg:portrait:flex--col lg:portrait:flex--stretch-x grow basis--0 gap">
     {% for shown_goal in activeInitiatives limit: 2 %}
-      <div class="flex flex--row gap">
+      {% unless forloop.first %}<div class="divider hidden lg:portrait:block"></div>{% endunless %}
+      <div class="flex flex--row gap grow basis--0">
         <div class="flex flex--col flex--stretch-x grow basis--0">
           {% render "goal_summary", goal: shown_goal %}
         </div>
-        {% if forloop.length == 2 and forloop.first %}<div class="divider--v"></div>{% endif %}
+        {% if forloop.length == 2 and forloop.first %}<div class="divider--v lg:portrait:hidden"></div>{% endif %}
       </div>
     {% endfor %}
     <div class="divider col--span-2"></div>
     {% for shown_goal in activeInitiatives offset: 2 limit: 2 %}
-      <div class="flex flex--row gap">
+      {% unless forloop.first %}<div class="divider hidden lg:portrait:block"></div>{% endunless %}
+      <div class="flex flex--row gap grow basis--0">
         <div class="flex flex--col flex--stretch-x grow basis--0">
           {% render "goal_summary", goal: shown_goal %}
         </div>
-        {% if forloop.length == 2 and forloop.first %}<div class="divider--v"></div>{% endif %}
+        {% if forloop.length == 2 and forloop.first %}<div class="divider--v lg:portrait:hidden"></div>{% endif %}
       </div>
     {% endfor %}
   </div>
@@ -68,10 +70,10 @@
         </thead>
         <tbody>
           <tr>
-            <td><span class="label">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
-            <td><span class="label">{{ goal.starsystem_name }}</span></td>
-            <td><span class="label">{{ goal.market_name }}</span></td>
-            {% if goal.objective != blank %}<td><span class="label">{{ goal.objective }}</span></td>{% endif %}
+            <td><span class="label lg:label--large">{{ goal.expiry | date: "%Y-%m-%d" }}</span></td>
+            <td><span class="label lg:label--large">{{ goal.starsystem_name }}</span></td>
+            <td><span class="label lg:label--large">{{ goal.market_name }}</span></td>
+            {% if goal.objective != blank %}<td><span class="label lg:label--large">{{ goal.objective }}</span></td>{% endif %}
           </tr>
         </tbody>
       </table>

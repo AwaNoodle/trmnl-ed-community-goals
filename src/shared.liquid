@@ -11,8 +11,8 @@
   {% assign progress_fill = progress | at_most: 100 %}
   <div class="progress-bar {{ size_class }} progress-bar--emphasis-3">
     <div class="content">
-      <span class="label">Goal Progress</span>
-      <span class="value value--xxsmall">{{ progress }} %</span>
+      <span class="label lg:label--large">Goal Progress</span>
+      <span class="value value--xxsmall lg:value--xsmall">{{ progress }} %</span>
     </div>
     <div class="track">
       <div class="fill" style="width: {{ progress_fill }}%"></div>
@@ -29,8 +29,8 @@
 
 {% template no_goal %}
   <div class="layout layout--col layout--center">
-    <span class="title {{ title_class }}">No active community goal</span>
-    <span class="description">Waiting for the next initiative</span>
+    <span class="title {{ title_class }} lg:title--xlarge">No active community goal</span>
+    <span class="description lg:description--large">Waiting for the next initiative</span>
   </div>
 {% endtemplate %}
 
