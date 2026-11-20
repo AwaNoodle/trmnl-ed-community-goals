@@ -149,6 +149,10 @@ expect three_goals-true full "150.0 %"
 expect three_goals-true full 'class="fill" style="width: 100%"'
 reject three_goals-true full "Fixture Objective 1"
 expect_goal_bars three_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%"
+# On a TRMNL X in portrait the goals stack in one column, with a divider between each pair of goals.
+expect three_goals-true full 'class="grid grid--cols-2 lg:portrait:flex lg:portrait:flex--col'
+expect_count three_goals-true full 'class="divider hidden lg:portrait:block"' 1
+expect_count three_goals-true full 'class="divider--v lg:portrait:hidden"' 1
 
 check_all_goals five_goals 4
 expect five_goals-true full "Fixture Goal 4"
@@ -156,6 +160,9 @@ expect five_goals-true full 'class="fill" style="width: 0%"'
 expect five_goals-true full "5 Active Goals"
 reject five_goals-true full "Fixture Goal 5"
 expect_goal_bars five_goals-true full "Fixture Goal 1|25.0 %|25.0%|Fixture Goal 2|75.0 %|75.0%|Fixture Goal 3|150.0 %|100%|Fixture Goal 4|0 %|0%"
+expect five_goals-true full 'class="grid grid--cols-2 lg:portrait:flex lg:portrait:flex--col'
+expect_count five_goals-true full 'class="divider hidden lg:portrait:block"' 2
+expect_count five_goals-true full 'class="divider--v lg:portrait:hidden"' 2
 
 # A goal with a blank objective shows no empty Objective label or column.
 build blank_objective-false blank_objective false
