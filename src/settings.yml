@@ -16,7 +16,7 @@ oauth_scopes: ''
 oauth_auth_params: ''
 id: 327741
 name: ED Community Goals
-description: Show Elite Community Goals
+description: Elite Dangerous Community Goals
 refresh_interval: 120
 custom_fields:
 - keyname: author_bio
